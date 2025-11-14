@@ -1,0 +1,484 @@
+/* ------------------------------------------
+   Portafolio - style.css
+   ------------------------------------------
+   Importo Google Fonts y Font Awesome para consistencia tipográfica e iconos.
+   (También se pueden linkear desde el HTML; incluido aquí para cumplir la indicación.)
+------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Raleway:wght@600;700&family=Poppins:wght@600;700&display=swap');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css');
+
+/* --- 0. VARIABLES Y RESET --- */
+:root{
+	/* Paleta profesional */
+	--bg: #0f1723;           /* fondo principal: gris muy oscuro / near-black */
+	--card-bg: #0f172a;      /* fondo tarjetas ligeramente distinto */
+	--surface: #0b1220;      /* fondo alternativo */
+
+	/* Texto: mayor contraste sobre fondo oscuro */
+	--text: #ffffff;        /* antes: #e6eef8 — ahora blanco para mejor contraste */
+	--muted: #c1d0e0;       /* antes: #9aa6b2 — más claro y legible sobre el fondo */
+
+	--primary: #6c8cff;      /* color primario (azul vibrante) */
+	--accent: #6cf3b6;       /* color de acento (verde suave) */
+	--glass: rgba(255,255,255,0.06);
+
+	/* Tipografías */
+	--font-sans: 'Montserrat', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+	/* Usar Poppins para títulos (más moderna/agradable), Raleway como fallback */
+	--font-head: 'Poppins', 'Raleway', var(--font-sans);
+
+	/* Espaciados */
+	--container-width: 1200px;
+	--radius: 14px;
+	--transition: all 0.3s ease;
+}
+
+/* Reset básico y box-sizing */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+	font-family: var(--font-sans);
+	background: radial-gradient(1200px 600px at 10% 10%, rgba(108,140,255,0.07), transparent 8%), var(--bg);
+	color: var(--text);
+	min-height: 100vh;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	line-height: 1.45;
+}
+
+/* Contenedor central para consistencia lateral */
+.container {
+	width: 90%;
+	max-width: var(--container-width);
+	margin: 0 auto;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+/* Enlaces y botones base */
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; cursor: pointer; }
+
+/* Transiciones suaves globales para elementos interactivos */
+a, button, .proyecto-card, .social-icons a, .skill { transition: var(--transition); }
+
+/* --- 1. HEADER --- */
+.site-header {
+	height: 100vh; /* full-viewport */
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	padding-top: 4rem; /* espacio para nav fijo */
+	background-image:
+		linear-gradient(180deg, rgba(4,8,15,0.55), rgba(6,10,20,0.55)),
+		url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+	background-size: cover;
+	background-position: center;
+}
+
+/* Navegación fija y glassmorphism */
+.main-nav {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 60;
+	backdrop-filter: blur(10px);
+	background: linear-gradient(180deg, rgba(10,14,20,0.25), rgba(10,14,20,0.12));
+	border-bottom: 1px solid rgba(255,255,255,0.03);
+}
+
+/* Inner nav (alineación) */
+.nav-inner {
+	display: flex;
+	align-items: center;
+	justify-content: center; /* CENTRAR el menú (antes: space-between) */
+	padding: 0.25rem 0;      /* reducir altura para que quede arriba del todo */
+	gap: 1rem;               /* mantener separación entre elementos internos */
+}
+
+/* Logo */
+.logo {
+	font-family: var(--font-head);
+	font-weight: 700;
+	letter-spacing: 0.4px;
+	color: var(--text);
+	font-size: 1.05rem;
+	padding: 0.25rem 0.5rem;
+	display: none !important; /* Ocultar el logo/texto que aparece en la izquierda */
+}
+
+/* Menú */
+.nav-menu {
+	list-style: none;
+	display: flex;
+	gap: 1rem;
+	align-items: center;
+	margin: 0; /* Ajuste opcional: asegurar que el menú quede centrado sin márgenes inesperados */
+}
+.nav-menu a {
+	color: var(--muted);
+	padding: 0.4rem 0.6rem;
+	border-radius: 8px;
+}
+.nav-menu a:hover {
+	color: var(--accent);
+	transform: translateY(-2px);
+}
+
+/* Banner content centrado */
+.banner-content {
+	text-align: center;
+	padding: 3rem 0;
+	max-width: 900px;
+	margin-top: 2rem;
+}
+.hero-title {
+	font-family: var(--font-head);
+	font-size: clamp(2rem, 6vw, 4rem);
+	letter-spacing: -1px;
+	margin-bottom: 0.4rem;
+	color: #ffffff;
+}
+.hero-subtitle {
+	color: var(--muted); /* antes: rgba(230,238,248,0.85) */
+	font-weight: 300;
+	margin-bottom: 1.2rem;
+}
+
+/* Botones primarios */
+.btn {
+	display: inline-block;
+	padding: 0.65rem 1rem;
+	border-radius: 10px;
+	font-weight: 600;
+	border: none;
+}
+.btn-primary {
+	background: linear-gradient(90deg,var(--primary), #8aa4ff);
+	color: #071025;
+	box-shadow: 0 6px 18px rgba(108,140,255,0.12);
+}
+.btn-primary:hover { transform: translateY(-4px); filter: brightness(0.98); }
+
+/* --- 2. SOBRE MÍ --- */
+.section { 
+    padding: 4.5rem 0; 
+    /* evitar que los anclajes queden ocultos bajo la nav fija */
+    scroll-margin-top: 72px; 
+}
+.section h2 {
+	font-family: var(--font-head);
+	font-size: 1.6rem;
+	margin-bottom: 1rem;
+	color: var(--text);
+}
+
+/* Tarjeta de biografía */
+.bio-card {
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	border-radius: var(--radius);
+	padding: 1.25rem 1.25rem;
+	box-shadow: 0 8px 30px rgba(2,6,12,0.6);
+	margin-bottom: 1rem;
+	color: var(--text); /* antes: var(--muted) */
+}
+
+/* Iconos sociales */
+.social-icons {
+	display: flex;
+	gap: 1rem;
+	margin: 0.75rem auto;     /* centra horizontalmente dentro del contenedor */
+	justify-content: center; /* centra los iconos en la mitad */
+	align-items: center;     /* alinea verticalmente los iconos */
+}
+.social-icons a {
+	color: var(--muted);
+	font-size: 2.2rem;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	border-radius: 10px;
+	background: rgba(255,255,255,0.02);
+}
+.social-icons a:hover {
+	color: var(--primary);
+	transform: scale(1.12);
+	box-shadow: 0 8px 20px rgba(108,140,255,0.08);
+}
+
+/* Hover específico en iconos (i dentro de a) */
+.social-icons a i { transition: var(--transition); }
+.social-icons a:hover i { color: var(--primary); transform: scale(1.2); }
+
+/* Texto secundario */
+.muted { color: var(--muted); }
+
+/* --- 3. PROYECTOS --- */
+/* Grid responsive: auto-fit con minmax para adaptarse a dispositivos */
+.proyectos-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+	gap: 1.25rem;
+	margin-top: 1rem;
+}
+
+/* Tarjeta de proyecto */
+.proyecto-card {
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	border-radius: 12px;
+	overflow: hidden;
+	box-shadow: 0 8px 24px rgba(2,6,12,0.6);
+	transition: var(--transition);
+	display: flex;
+	flex-direction: column;
+}
+.proyecto-card img { width: 100%; height: auto; display: block; object-fit: cover; }
+.proyecto-card h3 { padding: 1rem; padding-bottom: 0; margin: 0; color: var(--text); }
+.proyecto-card p { padding: 0 1rem 1rem 1rem; margin-top: 0.5rem; color: var(--muted); }
+
+/* Elevación al hacer hover */
+.proyecto-card:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 18px 40px rgba(2,8,20,0.7);
+}
+
+/* --- 4. HABILIDADES --- */
+.habilidades-lista {
+	margin-top: 1rem;
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+/* Cada skill como tarjeta */
+.skill {
+	background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00));
+	padding: 1rem;
+	border-radius: 12px;
+	box-shadow: 0 6px 20px rgba(2,6,12,0.5);
+}
+.skill-head { display: flex; gap: 0.6rem; align-items: center; margin-bottom: 0.6rem; color: var(--text); }
+.skill-head i { font-size: 1.2rem; color: var(--primary); }
+
+/* Barra de progreso */
+.skill-bar {
+	background: rgba(255,255,255,0.03);
+	height: 12px;
+	border-radius: 999px;
+	overflow: hidden;
+	margin-bottom: 0.6rem;
+}
+/* Reemplazado: mostrar nivel (Bajo/Medio/Alto) en la barra en vez de porcentaje numérico */
+.skill-level {
+	height: 100%;
+	background: linear-gradient(90deg, var(--primary), var(--accent));
+	transition: width 0.6s cubic-bezier(.2,.8,.2,1);
+	display: flex;
+	align-items: center;
+	justify-content: flex-end; /* etiqueta alineada a la derecha dentro del relleno */
+	padding-right: 0.6rem;
+	color: #ffffff;
+	font-weight: 700;
+	font-size: 0.85rem;
+}
+/* Anchos visuales asociados a los niveles (sólo visuales, la etiqueta muestra el texto) */
+.skill-level.lvl-low { width: 30%; }
+.skill-level.lvl-medium { width: 60%; }
+.skill-level.lvl-high { width: 90%; }
+
+.skill-level-label {
+	pointer-events: none;
+	white-space: nowrap;
+}
+
+/* Descripción */
+.skill-desc { color: var(--muted); font-size: 0.95rem; }
+
+/* --- 5. FORMULARIO DE CONTACTO --- */
+.contact-card {
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	padding: 1.25rem;
+	border-radius: 14px;
+	box-shadow: 0 10px 30px rgba(2,6,12,0.6);
+	display: grid;
+	gap: 0.75rem;
+	max-width: 720px;
+}
+
+/* >>> Nuevos estilos para sección de contacto mejorada <<< */
+.contact-grid {
+	display: grid;
+	grid-template-columns: 1fr 320px;
+	gap: 1.25rem;
+	align-items: start;
+	margin-top: 1rem;
+}
+@media (max-width: 920px) {
+	.contact-grid { grid-template-columns: 1fr; }
+}
+
+/* Campos con icono */
+.field { position: relative; margin-bottom: 0.85rem; }
+.field-icon {
+	position: absolute;
+	left: 12px;
+	top: 50%;
+	transform: translateY(-50%);
+	color: var(--muted);
+	font-size: 1rem;
+	pointer-events: none;
+}
+.field-icon--top { top: 1.1rem; transform: none; }
+
+/* Inputs y textarea: compensar espacio para icono
+   - estilos base accesibles (alto contraste, buen tamaño táctil)
+   - focus visible para navegación por teclado
+   - placeholder claro pero con suficiente contraste */
+input[type="text"],
+input[type="email"],
+textarea {
+	/* tamaño y caja */
+	width: 100%;
+	min-height: 44px;
+	padding: 0.6rem 1rem;
+	padding-left: 3rem; /* espacio para icono */
+	font-size: 1rem;
+	color: var(--text);
+	background: rgba(255,255,255,0.02);
+	border: 1px solid rgba(255,255,255,0.04);
+	border-radius: 10px;
+	resize: vertical; /* permitir cambiar altura de textarea */
+	outline: none;
+	transition: box-shadow 160ms ease, border-color 160ms ease, transform 160ms ease;
+}
+
+/* Textarea específico: dejar altura flexible y buen line-height */
+textarea { min-height: 120px; line-height: 1.5; padding-top: 0.9rem; }
+
+/* Placeholder: contraste adecuado pero menos potente que el texto principal */
+input::placeholder,
+textarea::placeholder { color: rgba(255,255,255,0.45); font-weight: 400; }
+
+/* Focus visible y accesible (para keyboard users) */
+input:focus,
+textarea:focus {
+	border-color: var(--primary);
+	box-shadow: 0 6px 24px rgba(108,140,255,0.06);
+}
+
+/* Estados de error: borde y sombra clara para indicar problema */
+.input-error {
+	/* estilo claro y consistente para campos invalidos */
+	box-shadow: 0 6px 20px rgba(255,60,60,0.06);
+	border: 1px solid rgba(255,80,80,0.45) !important;
+}
+
+/* File input estilo simple */
+.file-field input[type="file"] {
+	width: 100%;
+	padding: 0.5rem 0.6rem;
+	background: rgba(255,255,255,0.02);
+	border-radius: 8px;
+	border: 1px dashed rgba(255,255,255,0.03);
+	color: var(--muted);
+}
+
+/* Botón enviar: más prominente */
+.btn-enviar {
+	align-self: start;
+	background: linear-gradient(90deg, var(--accent), #3fe2b1);
+	color: #04221a;
+	padding: 0.75rem 1rem;
+	border-radius: 10px;
+	border: none;
+	font-weight: 700;
+	box-shadow: 0 10px 30px rgba(76,230,175,0.06);
+}
+.btn-enviar:hover {
+	filter: brightness(0.95);
+	transform: scale(1.05);
+	box-shadow: 0 12px 30px rgba(76,230,175,0.12);
+}
+
+/* Tarjeta lateral */
+.contact-info .info-card {
+	background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+	padding: 1.25rem;
+	border-radius: 12px;
+	box-shadow: 0 10px 30px rgba(2,6,12,0.5);
+}
+.contact-info h3 { margin-top: 0; margin-bottom: 0.6rem; font-family: var(--font-head); }
+.contact-info ul { list-style: none; padding: 0; margin: 0 0 1rem 0; }
+.contact-info li { display: flex; gap: 0.6rem; align-items: center; color: var(--muted); margin-bottom: 0.55rem; }
+.contact-info li i { color: var(--accent); width: 20px; text-align: center; }
+
+/* CTA y social dentro del lateral */
+.info-cta { display: flex; gap: 0.6rem; align-items: center; justify-content: space-between; margin-top: 0.6rem; flex-wrap: wrap; }
+.info-cta .btn { padding: 0.55rem 0.9rem; border-radius: 10px; background: linear-gradient(90deg,var(--primary), #8aa4ff); color: #071025; }
+.info-cta .social-icons { gap: 0.45rem; }
+
+/* Accesibilidad: ocultar visualmente labels donde corresponda */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+/* Estados de error */
+.input-error { box-shadow: 0 6px 20px rgba(255,60,60,0.06); border-color: rgba(255,80,80,0.35) !important; }
+
+/* Toast de éxito */
+.toast {
+	position: fixed;
+	left: 50%;
+	bottom: 28px;
+	transform: translateX(-50%) translateY(16px);
+	background: linear-gradient(90deg, rgba(108,140,255,0.12), rgba(108,243,182,0.06));
+	color: var(--text);
+	padding: 0.85rem 1rem;
+	border-radius: 12px;
+	box-shadow: 0 18px 50px rgba(2,8,20,0.6);
+	opacity: 0;
+	pointer-events: none;
+	transition: transform 260ms ease, opacity 260ms ease;
+	z-index: 999;
+}
+.toast--visible { opacity: 1; transform: translateX(-50%) translateY(0); pointer-events: auto; }
+
+/* Pequeños ajustes responsivos para inputs y lateral */
+@media (max-width: 540px) {
+	.field-icon { left: 10px; }
+	input[type="text"], input[type="email"], textarea { padding-left: 2.6rem; }
+	.contact-info .info-card { padding: 1rem; }
+}
+
+/* --- 6. FOOTER --- */
+.site-footer {
+	background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.35));
+	padding: 1.5rem 0;
+	margin-top: 2rem;
+	border-top: 1px solid rgba(255,255,255,0.02);
+}
+.site-footer p { color: var(--muted); text-align: center; }
+
+/* --- 7. RESPONSIVE & ACCESIBILIDAD --- */
+/* Ajustes menores para móviles */
+@media (max-width: 720px) {
+	.nav-menu { display: none; } /* para versión simple; se puede reemplazar por un menú hamburguesa */
+	.banner-content { padding: 2rem 0; }
+	.hero-title { font-size: 2rem; }
+	.social-icons a { width: 44px; height: 44px; font-size: 1.9rem; }
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+	* { transition: none !important; animation: none !important; }
+}
+
+/* Elevación al hacer hover en habilidades */
+.skill:hover {
+	transform: translateY(-10px);
+	box-shadow: 0 18px 40px rgba(2,8,20,0.7);
+
+}
